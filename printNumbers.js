@@ -69,3 +69,16 @@ const evenNum=()=>{
  }
 
  revArr()
+
+
+ const checkIfnumExist=(num)=>{
+  const b=[4,45,34,67,21,36]
+
+  for(let i=0;i<b.length;i++){
+    if (b[i]===num) return true
+    
+  }
+  return false
+ }
+
+ console.log(checkIfnumExist(324))
