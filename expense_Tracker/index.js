@@ -4,6 +4,8 @@ const expenses = [
   { title: "Groceries", amount: 202, category: "Food" }
 ];
 
+console.log(expenses)
+
 
 const showExpenses = (arr) => {
   for (let i = 0; i < arr.length; i++) {
@@ -56,4 +58,17 @@ const FiterExp=(arr,catogory)=>{
 }
 
 FiterExp(expenses,'Travel')
+
+const addExpense = (arr, title, amount, category) => {
+  const newExpense = {
+    title: title,
+    amount: amount,
+    category: category
+  };
+
+  arr.push(newExpense);
+};
+
+addExpense(expenses, "Movie", 12, "Entertainment");
+console.log(expenses)
 
