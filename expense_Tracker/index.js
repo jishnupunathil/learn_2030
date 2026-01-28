@@ -72,3 +72,16 @@ const addExpense = (arr, title, amount, category) => {
 addExpense(expenses, "Movie", 12, "Entertainment");
 console.log(expenses)
 
+const totalExpense=(expenses)=>{
+    let total =0
+    for(let i=0;i<expenses.length;i++){
+
+        total=total+expenses[i].amount
+
+    }
+    console.log(total);
+    
+}
+
+totalExpense(expenses)
+
