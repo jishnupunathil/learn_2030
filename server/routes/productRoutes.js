@@ -15,13 +15,25 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { name, price, image, countInStock } = req.body;
+    let { name, price, image, countInStock,description } = req.body;
+
+    if (!name || !price) {
+      return res.status(400).json({ message: "Name and price are required" });
+    }
+
+    if (!description) {
+      description = await generateDescription(name);
+    }
+
+
+    
 
     const product = new Product({
       name,
       price,
       image,
       countInStock,
+      description,
     });
 
     const createdProduct = await product.save();
