@@ -24,10 +24,8 @@ router.post("/", async (req, res) => {
     if (!description) {
       description = await generateDescription(name);
     }
-
-
     
-
+    
     const product = new Product({
       name,
       price,
