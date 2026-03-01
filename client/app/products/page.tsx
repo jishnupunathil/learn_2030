@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link"
+
 import { useEffect, useState } from "react";
 
 type Product = {
@@ -38,14 +40,16 @@ export default function ProductsPage() {
       <h1 className="text-2xl font-bold mb-4">Products</h1>
 
       <div className="grid gap-4">
-        {products.map((product) => (
-          <div key={product._id} className="border p-4 rounded-xl shadow">
-            <h2 className="text-lg font-semibold">{product.name}</h2>
-            <p className="text-gray-600">€{product.price}</p>
-            <p className="text-sm mt-2">{product.description}</p>
-          </div>
-        ))}
+  {products.map((product) => (
+    <Link key={product._id} href={`/products/${product._id}`}>
+      <div className="border p-4 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+        <h2 className="text-lg font-semibold">{product.name}</h2>
+        <p className="text-gray-600">€{product.price}</p>
+        <p className="text-sm mt-2">{product.description}</p>
       </div>
+    </Link>
+  ))}
+</div>
     </div>
   );
 }
