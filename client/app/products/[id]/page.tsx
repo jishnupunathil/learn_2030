@@ -47,4 +47,8 @@ export default function ProductDetails() {
       <p className="mt-2 text-sm">Stock: {product.countInStock}</p>
     </div>
   );
+
+
+
+  let abcd='testing'
 }
