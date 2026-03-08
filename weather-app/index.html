@@ -36,5 +36,25 @@
 
          </div>
     </div>
+
+    <script>
+        const apiKey = "cced6d2bdfbf8e31f9c82caf2846de59"
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=germany&units=metric" ;
+
+        async function checkWeather() {
+
+            const response = await fetch(apiUrl + "&appid=" + apiKey);
+            var data = await response.json();
+            console.log(data);
+
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temperature").innerHTML = Math.round(data.main.temp) + "°c";
+            document.querySelector(".humidity h2").innerHTML = data.main.humidity + "%";
+            document.querySelector(".wind h2").innerHTML = data.wind.speed + " km/h";
+
+        }
+
+        checkWeather();
+    </script>
 </body>
 </html>
