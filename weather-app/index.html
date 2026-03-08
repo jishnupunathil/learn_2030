@@ -4,8 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>weather app</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="card">
+         <div class="search">
+            <input type="text" placeholder="enter city name" spellcheck="false">
+            <button><img src="images/search.png" alt="search"></button>
+         </div>
+
+         <div class="weather">
+            <img src="images/rain.png" class="weather-icon">
+            <h2 class="temperature">25°c</h2>
+            <h3 class="city">Newyork</h3>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png" alt="humidity">
+                    <div class="humidity">
+                        <p>Humidity</p>
+                        <h2>60%</h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png" alt="wind">
+                    <div class="wind">
+                        <p>Wind Speed</p>
+                        <h2>10 km/h</h2>
+                    </div>
+                </div>
+            </div>
+
+         </div>
+    </div>
 </body>
 </html>
