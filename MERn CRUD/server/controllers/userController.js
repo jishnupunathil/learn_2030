@@ -164,6 +164,24 @@ const updateUser = asyncHandler(async (req, res) => {
   res.json({ message: "User updated successfully", user });
 });
 
+const deleteUser = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400);
+    throw new Error("Invalid user ID");
+  }
+
+  const user = await User.findByIdAndDelete(id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  res.json({ message: "User deleted successfully" ,success:true});
+})
+
 module.exports = {
   getStatus,
   searchUsers,
@@ -171,4 +189,5 @@ module.exports = {
   allUsers,
   createUser,
   updateUser,
+  deleteUser
 };
