@@ -1,4 +1,4 @@
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, Edit, Trash2 } from "lucide-react";
 import React from "react";
 
 function UserTable() {
