@@ -48,7 +48,6 @@ function SearchBar() {
                 <option >10</option>
                 <option >15</option>
                 <option >20</option>
-
             </select>
         </div> 
       </div>
