@@ -42,7 +42,7 @@ function UserTable() {
                 Created
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold
+                className="px-6 py-4 text-center text-sm font-semibold
                     text-gray-300"
               >
                 Action
@@ -56,9 +56,12 @@ function UserTable() {
                 User Name
               </td>
               <td className="px-6 py-4 text-sm text-white font medium">
+                Email
+              </td>
+              <td className="px-6 py-4 text-sm text-white font medium">
                 Phone
               </td>
-              <td className={`px-3 py-1 text-xs rounded-full font-semibold`}>
+              <td className={`px-6 py-1 text-xs rounded-full font-semibold`}>
                 Active
               </td>
               <td className="px-6 py-4 text-sm text-gray-400">Date</td>
