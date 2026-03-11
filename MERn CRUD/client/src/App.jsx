@@ -39,6 +39,13 @@ const [totalPages,setTotalPages]=useState(0)
 
 const status=['Active' , "Inactive"]
 
+//fetchStats
+
+const fetchStats=async ()=>{
+  const data=await getStats()
+  setStats(data)
+}
+
 
 function App() {
   return (
