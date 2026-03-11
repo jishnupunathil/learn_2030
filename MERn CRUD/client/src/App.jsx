@@ -6,6 +6,15 @@ import SearchBar from "./components/SearchBar";
 import UserTable from "./components/UserTable";
 import UserModel from "./components/UserModel";
 
+import {
+  getUsers,
+  searchUsers,
+  getStats,
+  addUser,
+  updateUser,
+  deleteUser
+} from './api/userApi'
+
 function App() {
   return (
     <div className="min-h-screen bg-gray-950">
