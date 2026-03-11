@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Plus, User } from "lucide-react";
 import StatsCard from "./components/StatsCard";
@@ -14,6 +14,31 @@ import {
   updateUser,
   deleteUser
 } from './api/userApi'
+
+const [users,setUsers]=useState([])
+const [totalUsers,setTotalUsers]=useState(0)
+const [stats,setStats]=useState({total:0,active:0,inactive:0})
+const [searchTerm,setSearchTerm]=useState('')
+const [isModalOpen,setIsMOdelOpen]=useState(false)
+const [formData,setFormData]=useState({
+  name:'',
+  email:'',
+  phone:"",
+  status:"active",
+})
+
+const [editingItem,setEditingItem]=useState(null)
+
+const [loading,setLOading]=useState(false)
+
+const [currentPage,setCurrentPage]=useState(1);
+
+const [itemsPerPage,setItemsPerPage]=useState(5)
+
+const [totalPages,setTotalPages]=useState(0)
+
+const status=['Active' , "Inactive"]
+
 
 function App() {
   return (
