@@ -1,7 +1,3 @@
-
-
-function App() {
-
   import React, { useEffect, useState } from "react";
 
 import { Plus, User } from "lucide-react";
@@ -18,6 +14,8 @@ import {
   updateUser,
   deleteUser
 } from './api/userApi'
+
+function App() {
 
 const [users,setUsers]=useState([])
 const [totalUsers,setTotalUsers]=useState(0)
@@ -140,7 +138,8 @@ const closeModel=()=>{
           </div>
           <button className="flex item-center gap-2 bg-green-500
           text-gray-900 px-5 py-2.5 rounded-lg hover:bg-green-400
-          transition-colors shadow-lg font-semibold">
+          transition-colors shadow-lg font-semibold"
+          onClick={()=>openModel()}>
             <Plus size={20} />
             Add User  
           </button>
@@ -157,7 +156,7 @@ const closeModel=()=>{
 <SearchBar />
 {/*User Table */}
 <UserTable />
-{/* <UserModel /> */}
+{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
 
       </main>
     </div>
