@@ -46,6 +46,22 @@ const fetchStats=async ()=>{
   setStats(data)
 }
 
+const fetchUsers=async ()=>{
+  const data = await getUsers(currentPage,itemsPerPage)
+  setUsers(data.users)
+  setTotalPages(data.totalPages)
+  setTotalUsers(data.totalUsers)
+  fetchStats()
+}
+
+const handleSearch= async () =>{
+  const data = await searchUsers (searchTerm,currentPage,itemsPerPage)
+    setUsers(data.users)
+    setTotalPages(data.totalPages)
+    setTotalUsers(data.totalUsers)
+   
+}
+
 
 function App() {
   return (
