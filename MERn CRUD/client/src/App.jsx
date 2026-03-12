@@ -23,7 +23,7 @@ const [users,setUsers]=useState([])
 const [totalUsers,setTotalUsers]=useState(0)
 const [stats,setStats]=useState({total:0,active:0,inactive:0})
 const [searchTerm,setSearchTerm]=useState('')
-const [isModalOpen,setIsMOdelOpen]=useState(false)
+const [isModalOpen,setIsModelOpen]=useState(false)
 const [formData,setFormData]=useState({
   name:'',
   email:'',
@@ -87,12 +87,38 @@ const handleSubmit = async ()=>{
       if(editingItem) await updateUser(editingItem._id,formData)
       else await addUser(formData)
     fetchUsers()
+    closeModel()
 
     }catch(error){
       alert(error.message)
     }
 
   setLoading(false)
+}
+
+const handleDelete = async(id)=>{
+  if(window.confirm ("Are You Sure")){
+    await deleteUser(id)
+    fetchUsers()
+  }
+}
+
+const openModel=(item=null)=>{
+  if(item){
+    setEditingItem(item)
+    setFormData(item)
+  }else{
+    setEditingItem(null)
+    setFormData({name:"",email:"",phone:"",status:"Active"})
+  }
+  setIsModelOpen(true)
+}
+
+const closeModel=()=>{
+  setIsModelOpen(false)
+  setEditingItem(null)
+  setFormData({name:"",email:"",phone:"",status:"Active"})
+
 }
 
   return (
