@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+
+
+function App() {
+
+  import React, { useEffect, useState } from "react";
 
 import { Plus, User } from "lucide-react";
 import StatsCard from "./components/StatsCard";
@@ -29,7 +33,7 @@ const [formData,setFormData]=useState({
 
 const [editingItem,setEditingItem]=useState(null)
 
-const [loading,setLOading]=useState(false)
+const [loading,setLoading]=useState(false)
 
 const [currentPage,setCurrentPage]=useState(1);
 
@@ -38,6 +42,18 @@ const [itemsPerPage,setItemsPerPage]=useState(5)
 const [totalPages,setTotalPages]=useState(0)
 
 const status=['Active' , "Inactive"]
+
+
+useEffect(()=>{
+  fetchUsers()
+
+},[currentPage,itemsPerPage])
+
+
+useEffect(()=>{
+  if(searchTerm) handleSearch()
+    else fetchUsers()
+},[searchTerm])
 
 //fetchStats
 
@@ -62,8 +78,23 @@ const handleSearch= async () =>{
    
 }
 
+const handleSubmit = async ()=>{
+  if(!formData.name || !formData.email || !formData.phone)
+    return alert("fill all the fields")
+    setLoading(true)
 
-function App() {
+    try{
+      if(editingItem) await updateUser(editingItem._id,formData)
+      else await addUser(formData)
+    fetchUsers()
+
+    }catch(error){
+      alert(error.message)
+    }
+
+  setLoading(false)
+}
+
   return (
     <div className="min-h-screen bg-gray-950">
       {/*Header*/}
