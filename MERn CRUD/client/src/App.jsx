@@ -157,6 +157,8 @@ const closeModel=()=>{
 {/*User Table */}
 <UserTable />
 {/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
+{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
+{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
 
       </main>
     </div>
