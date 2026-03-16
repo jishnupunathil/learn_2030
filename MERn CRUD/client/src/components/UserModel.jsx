@@ -1,7 +1,7 @@
 import { Check, X } from 'lucide-react'
 import React from 'react'
 
-function UserModel(isOpen,onClose) {
+function UserModel({isOpen,onClose}) {
     if(!isOpen) return null
   return (
     <div className='fixed inset-0 bg-black/80 flex items-center

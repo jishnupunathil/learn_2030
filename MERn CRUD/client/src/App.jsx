@@ -50,8 +50,8 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(searchTerm) handleSearch()
-    else fetchUsers()
-},[searchTerm])
+  else fetchUsers()
+},[searchTerm,currentPage,itemsPerPage])
 
 //fetchStats
 
@@ -101,13 +101,13 @@ const handleDelete = async(id)=>{
   }
 }
 
-const openModel=(item=null)=>{
+const openModel = (item = null) => {
   if(item){
     setEditingItem(item)
     setFormData(item)
   }else{
     setEditingItem(null)
-    setFormData({name:"",email:"",phone:"",status:"Active"})
+    setFormData({name:"",email:"",phone:"",status:"active"})
   }
   setIsModelOpen(true)
 }
@@ -115,7 +115,7 @@ const openModel=(item=null)=>{
 const closeModel=()=>{
   setIsModelOpen(false)
   setEditingItem(null)
-  setFormData({name:"",email:"",phone:"",status:"Active"})
+  setFormData({name:"",email:"",phone:"",status:"active"})
 
 }
 
@@ -136,10 +136,10 @@ const closeModel=()=>{
               <p className="text-gray-400">Mern Stack Application</p>
             </div>
           </div>
-          <button className="flex item-center gap-2 bg-green-500
+          <button className="flex items-center gap-2 bg-green-500
           text-gray-900 px-5 py-2.5 rounded-lg hover:bg-green-400
           transition-colors shadow-lg font-semibold"
-          onClick={()=>openModel()}>
+          onClick={openModel}>
             <Plus size={20} />
             Add User  
           </button>
@@ -150,16 +150,17 @@ const closeModel=()=>{
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 {/*Stats Cards*/}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <StatsCard  />
+          <StatsCard title="Total Users" value={{number:stats.total}}
+          icon={<User />}
+          bgIcon="bg-indigo-500"
+          iconColor="text-white"
+          gradient='from-indig-900 to-indigo-700' />
         </div>
 {/*search */}
 <SearchBar />
 {/*User Table */}
 <UserTable />
-{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
-{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
-{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}{/* <UserModel isOpen={isModalOpen} onClose={closeModel} /> */}
-
+ <UserModel isOpen={isModalOpen} onClose={closeModel} />
       </main>
     </div>
   );
