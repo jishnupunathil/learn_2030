@@ -8,27 +8,22 @@ dotenv.config();
 
 //mongodb connection
 
-mongoose.connect(process.env.mongdbUrl.replace("<dbPwd>",process.env.dbPwd))
-.then(()=>{
-    console.log("DB connection successful");
-})
-.catch((err)=>{
-    console.log("DB connection failed");
-})
-  
+const startServer = async () => {
+  try {
+    await mongoose.connect(
+      process.env.mongdbUrl.replace("<dbPwd>", process.env.dbPwd)
+    );
 
+    console.log("✅ DB connection successful");
 
-app.use((err, req, res, next) => {
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+    });
 
-  console.error(err); // shows error in terminal
+  } catch (err) {
+    console.error("❌ DB connection failed:", err);
+    process.exit(1); // stop app if DB fails
+  }
+};
 
-  res.status(res.statusCode || 500).json({
-    message: err.message,
-    stack: process.env.NODE_ENV === "production" ? null : err.stack
-  });
-
-});
-
-app.listen(PORT,()=>{
-    console.log(`Server is running on port ${PORT}`);
-})
+startServer();

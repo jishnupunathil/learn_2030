@@ -9,7 +9,7 @@ import UserModel from "./components/UserModel";
 import {
   getUsers,
   searchUsers,
-  getStats,
+  getStatus,
   addUser,
   updateUser,
   deleteUser,
@@ -18,7 +18,7 @@ import {
 function App() {
   const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [stats, setStats] = useState({ total: 0, active: 0, inactive: 0 });
+  const [stats, setStatus] = useState({ total: 0, active: 0, inactive: 0 });
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -45,30 +45,35 @@ function App() {
   }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
+    console.log("🚀 ~ App ~ searchTerm:", searchTerm)
     if (searchTerm) handleSearch();
     else fetchUsers();
   }, [searchTerm, currentPage, itemsPerPage]);
 
   //fetchStats
 
-  const fetchStats = async () => {
-    const data = await getStats();
-    setStats(data);
-  };
+  const fetchStatus = async () => {
+  console.log("🔥 fetchStats called"); // 👈 ADD
+  const data = await getStatus();
+  console.log("📊 stats data:", data);
+  setStatus(data);
+};
 
   const fetchUsers = async () => {
-    const data = await getUsers(currentPage, itemsPerPage);
-    setUsers(data.users);
-    setTotalPages(data.totalPages);
-    setTotalUsers(data.totalUsers);
-    fetchStats();
-  };
+  console.log("👥 fetchUsers called"); // 👈 ADD
+  const data = await getUsers(currentPage, itemsPerPage);
+  console.log("🚀 ~ fetchUsers ~ data:", data)
+  setUsers(data.users);
+   setTotalPages(data.pagination.totalPages);   // ✅ FIX
+  setTotalUsers(data.pagination.totalUsers);
+  fetchStatus();
+};
 
   const handleSearch = async () => {
     const data = await searchUsers(searchTerm, currentPage, itemsPerPage);
     setUsers(data.users);
-    setTotalPages(data.totalPages);
-    setTotalUsers(data.totalUsers);
+    setTotalPages(data.pagination.totalPages);   // ✅ FIX
+  setTotalUsers(data.pagination.totalUsers); 
   };
 
   const handleSubmit = async () => {
@@ -147,7 +152,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <StatsCard
             title="Total Users"
-            value={{ number: stats.total }}
+            value={{ number: stats.totalUsers }}
             icon={<Users />}
             bgIcon="bg-indigo-500"
             iconColor="text-white"
@@ -155,7 +160,7 @@ function App() {
           />
           <StatsCard
             title="Active Users"
-            value={{ number: stats.active }}
+            value={{ number: stats.activeUsers }}
             icon={<Check />}
             bgIcon="bg-green-500"
             iconColor="text-white"
@@ -163,7 +168,7 @@ function App() {
           />
           <StatsCard
             title="Inactive Users"
-            value={{ number: stats.inactive }}
+            value={{ number: stats.inactiveUsers }}
             icon={<X />}
             bgIcon="bg-indigo-500"
             iconColor="text-white"
@@ -171,7 +176,21 @@ function App() {
           />
         </div>
         {/*search */}
-        <SearchBar />
+        <SearchBar 
+          value={searchTerm}
+          onChange={setSearchTerm}
+          onClear={()=>{
+            setSearchTerm("")
+            setCurrentPage(1)
+          }}
+          itemsPerPage={itemsPerPage}
+          onItemsPerPageChange={(val)=>{
+            setItemsPerPage(val)
+            setCurrentPage(1)
+          }}
+          currentPage={currentPage}
+          totalUsers={totalUsers}
+        />
         {/*User Table */}
         <UserTable />
         <UserModel isOpen={isModalOpen} onClose={closeModel} />
