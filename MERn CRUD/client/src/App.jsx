@@ -45,7 +45,7 @@ function App() {
   }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
-    console.log("🚀 ~ App ~ searchTerm:", searchTerm)
+    console.log("🚀 ~ App ~ searchTerm:", searchTerm);
     if (searchTerm) handleSearch();
     else fetchUsers();
   }, [searchTerm, currentPage, itemsPerPage]);
@@ -53,27 +53,27 @@ function App() {
   //fetchStats
 
   const fetchStatus = async () => {
-  console.log("🔥 fetchStats called"); // 👈 ADD
-  const data = await getStatus();
-  console.log("📊 stats data:", data);
-  setStatus(data);
-};
+    console.log("🔥 fetchStats called"); // 👈 ADD
+    const data = await getStatus();
+    console.log("📊 stats data:", data);
+    setStatus(data);
+  };
 
   const fetchUsers = async () => {
-  console.log("👥 fetchUsers called"); // 👈 ADD
-  const data = await getUsers(currentPage, itemsPerPage);
-  console.log("🚀 ~ fetchUsers ~ data:", data)
-  setUsers(data.users);
-   setTotalPages(data.pagination.totalPages);   // ✅ FIX
-  setTotalUsers(data.pagination.totalUsers);
-  fetchStatus();
-};
+    console.log("👥 fetchUsers called"); // 👈 ADD
+    const data = await getUsers(currentPage, itemsPerPage);
+    console.log("🚀 ~ fetchUsers ~ data:", data);
+    setUsers(data.users);
+    setTotalPages(data.pagination.totalPages); // ✅ FIX
+    setTotalUsers(data.pagination.totalUsers);
+    fetchStatus();
+  };
 
   const handleSearch = async () => {
     const data = await searchUsers(searchTerm, currentPage, itemsPerPage);
     setUsers(data.users);
-    setTotalPages(data.pagination.totalPages);   // ✅ FIX
-  setTotalUsers(data.pagination.totalUsers); 
+    setTotalPages(data.pagination.totalPages); // ✅ FIX
+    setTotalUsers(data.pagination.totalUsers);
   };
 
   const handleSubmit = async () => {
@@ -176,23 +176,30 @@ function App() {
           />
         </div>
         {/*search */}
-        <SearchBar 
+        <SearchBar
           value={searchTerm}
           onChange={setSearchTerm}
-          onClear={()=>{
-            setSearchTerm("")
-            setCurrentPage(1)
+          onClear={() => {
+            setSearchTerm("");
+            setCurrentPage(1);
           }}
           itemsPerPage={itemsPerPage}
-          onItemsPerPageChange={(val)=>{
-            setItemsPerPage(val)
-            setCurrentPage(1)
+          onItemsPerPageChange={(val) => {
+            setItemsPerPage(val);
+            setCurrentPage(1);
           }}
           currentPage={currentPage}
           totalUsers={totalUsers}
         />
         {/*User Table */}
-        <UserTable />
+        <UserTable
+          users={users}
+          onEdit={openModel}
+          onDelete={handleDelete}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
         <UserModel isOpen={isModalOpen} onClose={closeModel} />
       </main>
     </div>

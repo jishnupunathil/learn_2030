@@ -1,7 +1,15 @@
 import { ChevronLeft, ChevronRight, Edit, Trash2 } from "lucide-react";
 import React from "react";
 
-function UserTable() {
+function UserTable({
+          users,
+          onEdit,
+          onDelete,
+          currentPage,
+          totalPages,
+          onPageChange
+}) {
+          console.log("🚀 ~ UserTable ~ users:", users)
   return (
     <div
       className="bg-gray-900 rounded-lg overflow-hiddden border
@@ -51,20 +59,25 @@ function UserTable() {
           </thead>
           <tbody className="divide-y divide-gray-800">
             {/*map method to render users*/}
-            <tr className="hover:bg-gray-800 transition-colors">
+            {users.map((u,indx)=>(
+             <tr className="hover:bg-gray-800 transition-colors">
               <td className="px-6 py-4 text-sm text-white font medium">
-                User Name
-              </td>
-              <td className="px-6 py-4 text-sm text-white font medium">
-                Email
+                {u.name}
               </td>
               <td className="px-6 py-4 text-sm text-white font medium">
-                Phone
+                {u.email}
               </td>
-              <td className={`px-6 py-1 text-xs rounded-full font-semibold`}>
-                Active
+              <td className="px-6 py-4 text-sm text-white font medium">
+                {u.phone}
               </td>
-              <td className="px-6 py-4 text-sm text-gray-400">Date</td>
+              <td className="px-6 py-4 text-sm"> 
+               <span className={`px-6 py-1 text-xs rounded-full font-semibold 
+              ${u.status === "active" ? "bg-green-500 text-gray-900" :
+               "bg-red-500 text-white"}`}>
+               
+               {u.status}</span>
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-400">{new Date(u.createdAt).toLocaleDateString()}</td>
               <td className="px-6 py-4 text-center">
                 <div className="flex justify-center gap-2">
                   <button
@@ -85,7 +98,8 @@ function UserTable() {
                   </button>
                 </div>
               </td>
-            </tr>
+            </tr> 
+            ))}
 
             {/*conditional rendering*/}
             <tr>
