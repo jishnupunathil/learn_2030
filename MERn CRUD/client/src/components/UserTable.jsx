@@ -118,12 +118,13 @@ function UserTable({
 
       {/*Pagination*/}
       {/*Conditional rendering for pagination*/}
-      <div className="px-6 py-4 border-t border-gray-800 flex justify-between
-      item-center bg-gray-800">
+     {users.length > 0 && (
+       <div className="px-6 py-4 border-t border-gray-800 flex justify-between
+      items-center bg-gray-800">
         <div className="text-sm text-gray-400">
-          Page 1 of 5
+          Page {currentPage} of {totalPages}
         </div>
-        <div className="flex-gap-2">
+        <div className="flex gap-2">
           <button className="flex items-center gap-1 px-3 py-2 bg-gray-700
           border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-600
           disabled:opacity-50">
@@ -141,6 +142,7 @@ function UserTable({
 
       </div>
 
+     )}
     </div>
   );
 }
