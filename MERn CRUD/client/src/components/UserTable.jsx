@@ -84,7 +84,7 @@ function UserTable({
                     className="flex items-center gap-1 px-3 py-1.5
                     text-sm bg-green-500 text-gray-900 rounded-lg
                     hover:bg-green-400 transition-all font-semibold"
-                  >
+                  onClick={()=>onEdit(u)}>
                     <Edit size={16} />
                     Edit
                   </button>
@@ -92,7 +92,7 @@ function UserTable({
                     className="flex items-center gap-1 px-3 py-1.5
                     text-sm bg-red-500 text-white rounded-lg
                     hover:bg-red-400 transition-all font-semibold"
-                  >
+                  onClick={()=>onDelete(u._id)}>
                     <Trash2 size={16} />
                     Delete
                   </button>
@@ -102,13 +102,15 @@ function UserTable({
             ))}
 
             {/*conditional rendering*/}
-            <tr>
+            {users.length === 0 && (
+              <tr>
             <td colSpan={6} className="py-12 text-center text-gray-400">
               No users found.
 
             </td>
 
             </tr>
+            )}
           </tbody>
         </table>
       </div>
