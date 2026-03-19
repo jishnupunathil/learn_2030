@@ -140,12 +140,17 @@ function UserTable({
                p === totalPages ||
                 (p >= currentPage -1 && p <= currentPage +1)
             ){
-              return <button className={`px-3 py-2 rounded-lg ${ currentPage === p
+              return (
+              <button className={`px-3 py-2 rounded-lg ${ currentPage === p
               ?"bg-green-500 text-gray-900 font-semibold"
               :"bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"}`}>
               {p}
               </button>
-            }
+            )
+          }else if(p=== currentPage -2 || p === currentPage+2){
+            return <span className="px-2 py-2 text-gray-500">....</span>
+          }
+          return null
           })}
           <button className="flex items-center gap-1 px-3 py-2 bg-gray-700
           border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-600
