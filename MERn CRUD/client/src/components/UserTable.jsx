@@ -127,14 +127,31 @@ function UserTable({
         <div className="flex gap-2">
           <button className="flex items-center gap-1 px-3 py-2 bg-gray-700
           border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-600
-          disabled:opacity-50">
+          disabled:opacity-50"
+          onClick={()=>onPageChange(currentPage-1)}
+          disabled={currentPage === 1}>
           <ChevronLeft size={16}/>Prev 
 
           </button>
-          <button className={`px-3 py-2 rounded-lg`}>1</button>
+          {[...Array(totalPages)].map((_,i)=>{
+            const p = i + 1
+            if(
+              p === 1 ||
+               p === totalPages ||
+                (p >= currentPage -1 && p <= currentPage +1)
+            ){
+              return <button className={`px-3 py-2 rounded-lg ${ currentPage === p
+              ?"bg-green-500 text-gray-900 font-semibold"
+              :"bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"}`}>
+              {p}
+              </button>
+            }
+          })}
           <button className="flex items-center gap-1 px-3 py-2 bg-gray-700
           border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-600
-          disabled:opacity-50">
+          disabled:opacity-50"
+          onClick={()=>onPageChange(currentPage +1)}
+          disabled={currentPage === totalPages}>
           Next <ChevronRight size={16}/>
 
           </button>
