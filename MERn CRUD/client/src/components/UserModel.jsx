@@ -1,7 +1,7 @@
 import { Check, X } from 'lucide-react'
 import React from 'react'
 
-function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status }) {
+function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,statusOpt }) {
     if(!isOpen) return null
   return (
     <div className='fixed inset-0 bg-black/80 flex items-center
@@ -70,7 +70,7 @@ function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status 
                         className='w-full px-4 py-2.5 bg-gray-800
                         focus:ring-green-500 border-gray-700 text-white rounded-lg
                         focus:ring-2 focus:border-green-500 outline-none'>
-                            {status.map((status)=>(
+                            {statusOpt.map((status)=>(
                                 <option value={status}>{status}</option>
                             ))}
                         </select>

@@ -38,7 +38,7 @@ function App() {
 
   const [totalPages, setTotalPages] = useState(0);
 
-  const stats = ["Active", "Inactive"];
+  const statusOpt = ["Active", "Inactive"];
 
   useEffect(() => {
     fetchUsers();
@@ -202,7 +202,7 @@ function App() {
         />
         <UserModel isOpen={isModalOpen} onClose={closeModel} formData={formData}
           setFormData={setFormData} onSubmit={handleSubmit} loading={loading}
-          status={status}
+          statusOpt={statusOpt}
         />
       </main>
     </div>
