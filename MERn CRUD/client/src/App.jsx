@@ -38,17 +38,12 @@ function App() {
 
   const [totalPages, setTotalPages] = useState(0);
 
-  const statusOpt = ["Active", "Inactive"];
+  const statusOpt = ["active", "inactive"];
 
-  useEffect(() => {
-    fetchUsers();
-  }, [currentPage, itemsPerPage]);
-
-  useEffect(() => {
-    console.log("🚀 ~ App ~ searchTerm:", searchTerm);
-    if (searchTerm) handleSearch();
-    else fetchUsers();
-  }, [searchTerm, currentPage, itemsPerPage]);
+useEffect(() => {
+  if (searchTerm) handleSearch();
+  else fetchUsers();
+}, [searchTerm, currentPage, itemsPerPage]);
 
   //fetchStats
 
@@ -82,7 +77,7 @@ function App() {
     setLoading(true);
 
     try {
-      if (editingItem) await updateUser(editingItem._id, formData);
+      if (editingItem && editingItem._id) await updateUser(editingItem._id, formData);
       else await addUser(formData);
       fetchUsers();
       closeModel();
@@ -103,7 +98,13 @@ function App() {
   const openModel = (item = null) => {
     if (item) {
       setEditingItem(item);
-      setFormData(item);
+      setFormData({
+        _id: item._id,
+  name: item.name || "",
+  email: item.email || "",
+  phone: item.phone || "",
+  status: item.status || "active",
+});
     } else {
       setEditingItem(null);
       setFormData({ name: "", email: "", phone: "", status: "active" });

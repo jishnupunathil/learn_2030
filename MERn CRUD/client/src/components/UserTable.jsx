@@ -12,7 +12,7 @@ function UserTable({
           console.log("🚀 ~ UserTable ~ users:", users)
   return (
     <div
-      className="bg-gray-900 rounded-lg overflow-hiddden border
+      className="bg-gray-900 rounded-lg overflow-hidden border
     border-gray-800"
     >
       <div className="overflow-x-auto">
@@ -141,7 +141,9 @@ function UserTable({
                 (p >= currentPage -1 && p <= currentPage +1)
             ){
               return (
-              <button className={`px-3 py-2 rounded-lg ${ currentPage === p
+              <button 
+              onClick={() => onPageChange(p)}
+              className={`px-3 py-2 rounded-lg ${ currentPage === p
               ?"bg-green-500 text-gray-900 font-semibold"
               :"bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"}`}>
               {p}
