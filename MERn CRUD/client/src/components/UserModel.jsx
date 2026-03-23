@@ -24,7 +24,11 @@ function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status 
                         <label className='block mb-2 font-medium text-gray-300'>
                             Name *
                         </label>
-                        <input type="text" placeholder="Enter user name" className='w-full
+                        <input type="text" placeholder="Enter user name"
+                        value={formData.name}
+                         onChange={(e)=>
+                         setFormData({...formData, name:e.target.value})}
+                         className='w-full
                         px-4 py-2.5 bg-gray-800 border border-gray-700 text-white
                         placeholder-gray-500 rounded-lg focus:ring-2
                         focus:ring-green-500 outline-none' />
@@ -33,7 +37,11 @@ function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status 
                         <label className='block mb-2 font-medium text-gray-300'>
                             Email *
                         </label>
-                        <input type="email" placeholder="Enter user email" className='w-full
+                        <input type="email" placeholder="Enter user email"
+                        value={formData.email}
+                         onChange={(e)=>
+                         setFormData({...formData, email:e.target.value})}
+                          className='w-full
                         px-4 py-2.5 bg-gray-800 border border-gray-700 text-white
                         placeholder-gray-500 rounded-lg focus:ring-2
                         focus:ring-green-500 outline-none' />
@@ -42,7 +50,11 @@ function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status 
                         <label className='block mb-2 font-medium text-gray-300'>
                             Phone *
                         </label>
-                        <input type="tel" placeholder="Enter user phone" className='w-full
+                        <input type="tel" placeholder="Enter user phone"
+                        value={formData.phone}
+                         onChange={(e)=>
+                         setFormData({...formData, phone:e.target.value})}
+                          className='w-full
                         px-4 py-2.5 bg-gray-800 border border-gray-700 text-white
                         placeholder-gray-500 rounded-lg focus:ring-2
                         focus:ring-green-500 outline-none' />
@@ -51,26 +63,34 @@ function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status 
                         <label className='block mb-2 font-medium text-gray-300'>
                             Status *
                         </label>
-                        <select className='w-full px-4 py-2.5 bg-gray-800
+                        <select 
+                        value={formData.status}
+                        onChange={(e)=>
+                        setFormData({...formData, status:e.target.value})}
+                        className='w-full px-4 py-2.5 bg-gray-800
                         focus:ring-green-500 border-gray-700 text-white rounded-lg
                         focus:ring-2 focus:border-green-500 outline-none'>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            {status.map((status)=>(
+                                <option value={status}>{status}</option>
+                            ))}
                         </select>
                     </div>
                 </div>
                 <div className='flex gap-3 mt-6'>
                     <button className='flex-1 px-4 py-2.5 bg-gray-800 border
                     border-gray-700 text-gray-300 rounded-lg hover:bg-gray-700
-                    transition-all'>
+                    transition-all'
+                    onClick={onClose}>
                         Cancel
                     </button>
                     <button className='flex-1 flex items-center justify-center 
                     px-4 py-2.5 bg-green-500 border
                     border-gray-700 text-gray-900 rounded-lg hover:bg-green-400
-                    transition-all'>
+                    transition-all'
+                    onClick={onSubmit}
+                    disabled={loading}>
                         <Check size={20}/>
-                        Add User
+                        {loading ? "Saving ...." : formData._id ? "Update User" : "Add User"}
 
                     </button>
                 </div>
