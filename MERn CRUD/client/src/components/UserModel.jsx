@@ -1,7 +1,7 @@
 import { Check, X } from 'lucide-react'
 import React from 'react'
 
-function UserModel({isOpen,onClose}) {
+function UserModel({isOpen,onClose,formData,setFormData,onSubmit,loading,status }) {
     if(!isOpen) return null
   return (
     <div className='fixed inset-0 bg-black/80 flex items-center
@@ -10,7 +10,9 @@ function UserModel({isOpen,onClose}) {
         max-h-screen overflow-y-auto border border-gray-800'>
             <div className='flex items-center justify-between p-6 border-b
             border-gray-800'>
-                <h2 className='text-2xl font-bold text-white'>Add new user</h2>
+                <h2 className='text-2xl font-bold text-white'>{
+                    formData._id ?  "Edit User" : "Add New User"
+                }</h2>
                 <button className='tex-gray-400 hover:text-white transition-all'
                 onClick={()=>onClose()}>
                     <X size={20}/>

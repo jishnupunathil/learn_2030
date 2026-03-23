@@ -18,7 +18,7 @@ import {
 function App() {
   const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [stats, setStatus] = useState({ total: 0, active: 0, inactive: 0 });
+  const [status, setStatus] = useState({ total: 0, active: 0, inactive: 0 });
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -38,7 +38,7 @@ function App() {
 
   const [totalPages, setTotalPages] = useState(0);
 
-  const status = ["Active", "Inactive"];
+  const stats = ["Active", "Inactive"];
 
   useEffect(() => {
     fetchUsers();
@@ -152,7 +152,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <StatsCard
             title="Total Users"
-            value={{ number: stats.totalUsers }}
+            value={{ number: status.totalUsers }}
             icon={<Users />}
             bgIcon="bg-indigo-500"
             iconColor="text-white"
@@ -160,7 +160,7 @@ function App() {
           />
           <StatsCard
             title="Active Users"
-            value={{ number: stats.activeUsers }}
+            value={{ number: status.activeUsers }}
             icon={<Check />}
             bgIcon="bg-green-500"
             iconColor="text-white"
@@ -168,7 +168,7 @@ function App() {
           />
           <StatsCard
             title="Inactive Users"
-            value={{ number: stats.inactiveUsers }}
+            value={{ number: status.inactiveUsers }}
             icon={<X />}
             bgIcon="bg-indigo-500"
             iconColor="text-white"
@@ -200,7 +200,10 @@ function App() {
           totalPages={totalPages}
           onPageChange={setCurrentPage}
         />
-        <UserModel isOpen={isModalOpen} onClose={closeModel} />
+        <UserModel isOpen={isModalOpen} onClose={closeModel} formData={formData}
+          setFormData={setFormData} onSubmit={handleSubmit} loading={loading}
+          status={status}
+        />
       </main>
     </div>
   );
