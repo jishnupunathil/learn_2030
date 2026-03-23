@@ -14,6 +14,7 @@ import {
   updateUser,
   deleteUser,
 } from "./api/userApi";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -73,7 +74,7 @@ useEffect(() => {
 
   const handleSubmit = async () => {
     if (!formData.name || !formData.email || !formData.phone)
-      return alert("fill all the fields");
+      return toast.error("Please fill all fields");
     setLoading(true);
 
     try {
@@ -82,8 +83,8 @@ useEffect(() => {
       fetchUsers();
       closeModel();
     } catch (error) {
-      alert(error.message);
-    }
+  toast.error(error.message || "Something went wrong");
+}
 
     setLoading(false);
   };
@@ -120,6 +121,7 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gray-950">
+     <Toaster position="top-right" />
       {/*Header*/}
       <header className="bg-gray-900 shadow-xl border-b border-gray-800">
         <div

@@ -44,6 +44,7 @@ const endUser = Math.min(safePage * safeLimit, safeTotal);
         {/*conditional Rendering */}
         {value && (
           <button
+          onClick={onClear} 
             className="absolute right-2 top-1/2 transform -translate-y-1/2
      text-gray-400 hover:text-white hover:bg-gray-700 p-1 rounded-full
      transition-all"

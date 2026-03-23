@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react";
-import React from "react";
+
+
 
 function UserModel({
   isOpen,
@@ -17,7 +18,7 @@ function UserModel({
       className="fixed inset-0 bg-black/80 flex items-center
     justify-center p-4 z-50"
     >
-      <div
+          <div
         className="bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full
         max-h-screen overflow-y-auto border border-gray-800"
       >
